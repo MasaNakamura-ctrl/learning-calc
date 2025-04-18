@@ -3,44 +3,45 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="./calc.css">
+        <script type="text/javascript" src="./calc.js"></script>
         <title>js-calc</title>
     </head>
     <body>
         <table>
             <tr>
                 <td colspan=4>
-                    <input type="text" class="display" name="display" value=0 disabled>
+                    <input class="display" type="text" class="display" name="display" value=0 disabled>
                 </td>
             </tr>
             <tr>
-                <td><p class="gray">AC</p></td>
-                <td><p class="gray">+/-</p></td>
-                <td><p class="gray">%</p></td>
-                <td><p class="orange">÷</p></td>
+                <td><input class="button gray" type="button" value="AC"></td>
+                <td><input class="button gray" type="button" value="+/-"></td>
+                <td><input class="button gray" type="button" value="%"></td>
+                <td><input class="button orange" type="button" value="÷"></td>
             </tr>
             <tr>
-                <td><p>7</p></td>
-                <td><p>8</p></td>
-                <td><p>9</p></td>
-                <td><p class="orange">×</p></td>
+                <td><input class="button" type="button" value="7" onclick="num_clicked(this)"></td>
+                <td><input class="button" type="button" value="8" onclick="num_clicked(this)"></td>
+                <td><input class="button" type="button" value="9" onclick="num_clicked(this)"></td>
+                <td><input class="button orange" type="button" value="×"></td>
             </tr>
             <tr>
-                <td><p>4</p></td>
-                <td><p>5</p></td>
-                <td><p>6</p></td>
-                <td><p class="orange">−</p></td>
+                <td><input class="button" type="button" value="4" onclick="num_clicked(this)"></td>
+                <td><input class="button" type="button" value="5" onclick="num_clicked(this)"></td>
+                <td><input class="button" type="button" value="6" onclick="num_clicked(this)"></td>
+                <td><input class="button orange" type="button" value="-"></td>
             </tr>
             <tr>
-                <td><p>1</p></td>
-                <td><p>2</p></td>
-                <td><p>3</p></td>
-                <td><p class="orange">+</p></td>
+                <td><input class="button" type="button" value="1" onclick="num_clicked(this)"></td>
+                <td><input class="button" type="button" value="2" onclick="num_clicked(this)"></td>
+                <td><input class="button" type="button" value="3" onclick="num_clicked(this)"></td>
+                <td><input class="button orange" type="button" value="+"></td>
             </tr>
             <tr>
                 <td></td>
-                <td><p>0</p></td>
-                <td><p>.</p></td>
-                <td><p class="orange">=</p></td>
+                <td><input class="button" type="button" value="0" onclick="num_clicked(this)"></td>
+                <td><input class="button" type="button" value=.></td>
+                <td><input class="button orange" type="button" value="="></td>
             </tr>
         </table>
     </body>
