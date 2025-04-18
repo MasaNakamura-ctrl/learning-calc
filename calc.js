@@ -6,3 +6,11 @@ function num_clicked(btn){
         display.value += btn.value
     }
 }
+
+function dot_clicked(btn){
+    const display = document.querySelector('input[name="display"]');
+    const result = display.value.includes('.');
+    if (!result){
+        display.value += btn.value
+    }
+}
