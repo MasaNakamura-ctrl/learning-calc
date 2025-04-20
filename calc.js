@@ -33,7 +33,15 @@ function operation_clicked(btn){
 
 function equal_clicked(){
     const display = document.querySelector('input[name="display"]');
-    const display_calc = display.value.replace(/×/g, '*').replace(/÷/g, '/');
-    const display_result = eval(display_calc);
-    display.value = display_result;
+    const display_tail = display.value.slice(-1);
+    const operations = ['+', '-', '×', '÷', '%'];
+    if(operations.includes(display_tail)){
+        const display_calc = display.value.slice(0, -1).replace(/×/g, '*').replace(/÷/g, '/');
+        const display_result = eval(display_calc);
+        display.value = display_result;
+    }else{
+        let display_calc = display.value.replace(/×/g, '*').replace(/÷/g, '/');
+        const display_result = eval(display_calc);
+        display.value = display_result;
+    }
 }
