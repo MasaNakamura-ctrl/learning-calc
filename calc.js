@@ -28,7 +28,7 @@ function operation_clicked(btn){
         display.value += btn.value;
     }else if((btn.value==='-')&&(operations.slice(2).includes(display_tail))){
         display.value += btn.value;
-    }else if((btn.value!=='-')&&(display_tail==='-')){
+    }else if((btn.value!=='-')&&(display_tail==='-')&&(operations.includes(display.value.slice(-2,-1)))){
         display.value = display.value.slice(0, -1);
     }else{
         display.value = display.value.slice(0, -1) + btn.value;
