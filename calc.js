@@ -14,3 +14,8 @@ function dot_clicked(btn){
         display.value += btn.value
     }
 }
+
+function ac_clicked(btn){
+    const display = document.querySelector('input[name="display"]');
+    display.value = "0"
+}
