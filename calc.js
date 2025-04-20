@@ -26,6 +26,8 @@ function operation_clicked(btn){
     const operations = ['+', '-', '×', '÷', '%'];
     if(!operations.includes(display_tail)){
         display.value += btn.value;
+    }else if((btn.value==='-')&&(operations.slice(2).includes(display_tail))){
+        display.value += btn.value;
     }else{
         display.value = display.value.slice(0, -1) + btn.value;
     }
