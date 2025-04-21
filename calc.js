@@ -49,3 +49,17 @@ function equal_clicked(){
         display.value = display_result;
     }
 }
+
+function abs_clicked(){
+    const display = document.querySelector('input[name="display"]');
+    if (!/\+|\-|\×|\÷|\%/.test(display.value)) {
+        const display_result = eval(display.value) * -1;
+        display.value = display_result;
+    }else{
+        const display_head = display.value.slice(0, 1);
+        if(display_head==="-"){
+            const display_result = eval(display.value) * -1;
+            display.value = display_result;
+        }
+    }
+}
