@@ -86,6 +86,8 @@ function abs_clicked(){
         const display_head = display.slice(0, 1);
         if(display_head==="-"){
             result_display(eval(display) * -1);
+        }else{
+            result_display(display);
         }
     }else{
         result_display(eval(display) * -1);
