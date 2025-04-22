@@ -1,65 +1,93 @@
+const Zero = "0";
+
+const Dot = "."
+
+function get_display_element(){
+    return document.querySelector('input[name="display"]')
+}
+
+function read_display(){
+    return get_display_element().value;
+}
+
+function read_btn(btn){
+    const button_value = btn.value;
+    return button_value;
+}
+
+function result_display(value){
+    get_display_element().value = value;
+}
+
+function operand_list(){
+    const operands = ['+', '-', '×', '÷', '%'];
+    return operands;
+}
+
+function operand_replace(display){
+    return display.replace(/×/g, '*').replace(/÷/g, '/');
+}
+
 function num_clicked(btn){
-    const display = document.querySelector('input[name="display"]');
-    if (display.value === "0"){
-        display.value = btn.value;
+    let display = read_display();
+    const button_value = read_btn(btn);
+    if (display === Zero){
+        result_display(button_value);
     }else{
-        display.value += btn.value;
+        result_display(display + button_value);
     }
 }
 
 function dot_clicked(btn){
-    const display = document.querySelector('input[name="display"]');
-    const result = display.value.includes('.');
+    let display = read_display();
+    const button_value = read_btn(btn);
+    const result = display.includes(Dot);
     if (!result){
-        display.value += btn.value;
+        result_display(display + button_value);
     }
 }
 
 function ac_clicked(){
-    const display = document.querySelector('input[name="display"]');
-    display.value = "0";
+    result_display(Zero);
 }
 
 function operation_clicked(btn){
-    const display = document.querySelector('input[name="display"]');
-    const display_tail = display.value.slice(-1);
-    const operations = ['+', '-', '×', '÷', '%'];
-    if(!operations.includes(display_tail)){
-        display.value += btn.value;
-    }else if((btn.value==='-')&&(operations.slice(2).includes(display_tail))){
-        display.value += btn.value;
-    }else if((btn.value!=='-')&&(display_tail==='-')&&(operations.includes(display.value.slice(-2,-1)))){
-        display.value = display.value.slice(0, -1);
+    let display = read_display();
+    const display_tail = display.slice(-1);
+    const button_value = read_btn(btn);
+    const operands = operand_list();
+    if(!operand_list().includes(display_tail)){
+        result_display(display + button_value);
+    }else if((button_value==='-')&&(operands.slice(2).includes(display_tail))){
+        result_display(display + button_value);
+    }else if((button_value!=='-')&&(display_tail==='-')&&(operands.includes(display.slice(-2,-1)))){
+        result_display(display.slice(0, -1))
     }else{
-        display.value = display.value.slice(0, -1) + btn.value;
+        result_display(display.slice(0, -1) + button_value);
     }
 }
 
 function equal_clicked(){
-    const display = document.querySelector('input[name="display"]');
-    const display_tail = display.value.slice(-1);
-    const operations = ['+', '-', '×', '÷', '%'];
-    if(operations.includes(display_tail)){
-        const display_calc = display.value.slice(0, -1).replace(/×/g, '*').replace(/÷/g, '/');
-        const display_result = eval(display_calc);
-        display.value = display_result;
+    const display = read_display();
+    const display_tail = display.slice(-1);
+    const operands = operand_list();
+    let display_calc = display;
+    if(operands.includes(display_tail)){
+        display_calc = operand_replace(display.slice(0, -1));
     }else{
-        let display_calc = display.value.replace(/×/g, '*').replace(/÷/g, '/');
-        const display_result = eval(display_calc);
-        display.value = display_result;
+        display_calc = operand_replace(display);
     }
+    result_display(eval(display_calc));
 }
 
 function abs_clicked(){
-    const display = document.querySelector('input[name="display"]');
-    if (!/\+|\-|\×|\÷|\%/.test(display.value)) {
-        const display_result = eval(display.value) * -1;
-        display.value = display_result;
-    }else{
-        const display_head = display.value.slice(0, 1);
+    const display = read_display();
+    if (/\+|\-|\×|\÷|\%/.test(display)) {
+        const display_head = display.slice(0, 1);
         if(display_head==="-"){
-            const display_result = eval(display.value) * -1;
-            display.value = display_result;
+            result_display(eval(display) * -1);
         }
+    }else{
+        result_display(eval(display) * -1);
     }
 }
