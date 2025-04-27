@@ -44,23 +44,32 @@ function operand_replace(display){
     return display.replace(/×/g, '*').replace(/÷/g, '/');
 }
 
+function value_is_stg(value, stg){
+    return value === stg;
+}
+
 function num_clicked(btn){
     let display = read_display();
     const button_value = read_btn(btn);
-    if (display === Zero){
-        result_display(button_value);
+    if (value_is_stg(display, Zero)){
+        display = button_value;
     }else{
-        result_display(display + button_value);
+        display += button_value;
     }
+    result_display(display);
+}
+
+function display_without_stg(display, stg){
+    return !display.includes(stg);
 }
 
 function dot_clicked(btn){
     let display = read_display();
     const button_value = read_btn(btn);
-    const result = display.includes(Dot);
-    if (!result){
-        result_display(display + button_value);
+    if (display_without_stg(display, Dot)){
+        display += button_value;
     }
+    result_display(display);
 }
 
 function ac_clicked(){
@@ -69,14 +78,15 @@ function ac_clicked(){
 
 function operation_clicked(btn){
     let display = read_display();
-    const display_tail = display.slice(Tail);
     const button_value = read_btn(btn);
+    const display_tail = display.slice(Tail);
     const operands = operand_list();
     if(!operand_list().includes(display_tail)){
         result_display(display + button_value);
-    }else if((button_value===Minus)&&(operands.slice(After_Second).includes(display_tail))){
+    }else if((value_is_stg(button_value, Minus))&&(operands.slice(After_Second).includes(display_tail))){
         result_display(display + button_value);
-    }else if((button_value!==Minus)&&(display_tail===Minus)&&(operands.includes(display.slice(Before_Tail,Tail)))){
+    }else if((!value_is_stg(button_value, Minus))&&(value_is_stg(display_tail, Minus))
+        &&(operands.includes(display.slice(Before_Tail,Tail)))){
         result_display(display.slice(Head, Tail))
     }else{
         result_display(display.slice(Head, Tail) + button_value);
@@ -100,7 +110,7 @@ function abs_clicked(){
     const display = read_display();
     if (Operand_Tests.test(display)) {
         const display_head = display.slice(Head, After_Head);
-        if(display_head===Minus){
+        if(value_is_stg(display_head, Minus)){
             result_display(eval(display) * Abs);
         }else{
             result_display(display);
