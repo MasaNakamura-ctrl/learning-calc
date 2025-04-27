@@ -139,15 +139,16 @@ window.addEventListener('DOMContentLoaded', () => {
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const value = button.value;
-            if (!isNaN(value) || value === '0') {
+            const value_is_num = !isNaN(value);
+            if (value_is_num) {
                 num_clicked(button);
-            } else if (value === Dot) {
+            } else if (value_is_stg(value, Dot)) {
                 dot_clicked(button);
-            } else if (value === AC) {
+            } else if (value_is_stg(value, AC)) {
                 ac_clicked();
-            } else if (value === PlusMinus) {
+            } else if (value_is_stg(value, PlusMinus)) {
                 abs_clicked();
-            } else if (value === Equal) {
+            } else if (value_is_stg(value, Equal)) {
                 equal_clicked();
             } else {
                 operation_clicked(button);
