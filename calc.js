@@ -16,8 +16,6 @@ const Before_Tail = -2;
 
 const Abs = -1;
 
-const Operand_Tests = /\+|\-|\×|\÷|\%/;
-
 function get_display_element(){
     return document.querySelector('input[name="display"]')
 }
@@ -111,16 +109,21 @@ function equal_clicked(){
     result_display(eval(display_calc));
 }
 
+const operands = /\+|\-|\×|\÷|\%/;
+
+function operand_test(operands, display){
+    operands.test(display);
+}
+
 function abs_clicked(){
     let display = read_display();
-    if (Operand_Tests.test(display)) {
-        const display_head = display.slice(Head, After_Head);
+    const display_head = display.slice(Head, After_Head);
+    if (operand_test(operands, display)) {
         if(value_is_stg(display_head, Minus)){
-            result_display(eval(display) * Abs);
-        }else{
-            result_display(display);
+            display = eval(display) * Abs;
         }
     }else{
-        result_display(eval(display) * Abs);
+        display = eval(display) * Abs;
     }
+    result_display(display);
 }
