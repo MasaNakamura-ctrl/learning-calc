@@ -74,9 +74,9 @@ function operation_clicked(btn){
     const operands = operand_list();
     if(!operand_list().includes(display_tail)){
         result_display(display + button_value);
-    }else if((button_value==='-')&&(operands.slice(After_Second).includes(display_tail))){
+    }else if((button_value===Minus)&&(operands.slice(After_Second).includes(display_tail))){
         result_display(display + button_value);
-    }else if((button_value!=='-')&&(display_tail==='-')&&(operands.includes(display.slice(Before_Tail,Tail)))){
+    }else if((button_value!==Minus)&&(display_tail===Minus)&&(operands.includes(display.slice(Before_Tail,Tail)))){
         result_display(display.slice(Head, Tail))
     }else{
         result_display(display.slice(Head, Tail) + button_value);
