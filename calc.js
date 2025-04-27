@@ -8,7 +8,7 @@ const Head = 0;
 
 const After_Head = 1;
 
-const After_Second = 2;
+const After_Minus = 2;
 
 const Tail = -1;
 
@@ -76,25 +76,30 @@ function ac_clicked(){
     result_display(Zero);
 }
 
+function stg_is_in_list(stg, list){
+    return stg.includes(list);
+}
+
 function operation_clicked(btn){
     let display = read_display();
     const button_value = read_btn(btn);
     const display_tail = display.slice(Tail);
     const operands = operand_list();
-    if(!operand_list().includes(display_tail)){
-        result_display(display + button_value);
-    }else if((value_is_stg(button_value, Minus))&&(operands.slice(After_Second).includes(display_tail))){
-        result_display(display + button_value);
+    if(!operands.includes(display_tail)){
+        display += button_value;
+    }else if((value_is_stg(button_value, Minus))&&(stg_is_in_list(operands.slice(After_Minus), display_tail))){
+        display += button_value;
     }else if((!value_is_stg(button_value, Minus))&&(value_is_stg(display_tail, Minus))
-        &&(operands.includes(display.slice(Before_Tail,Tail)))){
-        result_display(display.slice(Head, Tail))
+        &&(stg_is_in_list(operands, display.slice(Before_Tail,Tail)))){
+        display = display.slice(Head, Tail);
     }else{
-        result_display(display.slice(Head, Tail) + button_value);
+        display = display.slice(Head, Tail) + button_value;
     }
+    result_display(display);
 }
 
 function equal_clicked(){
-    const display = read_display();
+    let display = read_display();
     const display_tail = display.slice(Tail);
     const operands = operand_list();
     let display_calc = display;
@@ -107,7 +112,7 @@ function equal_clicked(){
 }
 
 function abs_clicked(){
-    const display = read_display();
+    let display = read_display();
     if (Operand_Tests.test(display)) {
         const display_head = display.slice(Head, After_Head);
         if(value_is_stg(display_head, Minus)){
