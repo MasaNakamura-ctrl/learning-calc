@@ -16,6 +16,12 @@ const Before_Tail = -2;
 
 const Abs = -1;
 
+const AC = "AC";
+
+const PlusMinus = "+/-";
+
+const Equal = "=";
+
 function get_display_element(){
     return document.querySelector('input[name="display"]')
 }
@@ -127,3 +133,25 @@ function abs_clicked(){
     }
     result_display(display);
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('input[type="button"]');
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const value = button.value;
+            if (!isNaN(value) || value === '0') {
+                num_clicked(button);
+            } else if (value === Dot) {
+                dot_clicked(button);
+            } else if (value === AC) {
+                ac_clicked();
+            } else if (value === PlusMinus) {
+                abs_clicked();
+            } else if (value === Equal) {
+                equal_clicked();
+            } else {
+                operation_clicked(button);
+            }
+        });
+    });
+});
