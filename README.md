@@ -22,9 +22,9 @@ JavaScriptを用いた実装の学習として、iPhoneの計算機アプリの�
 - "+/-"による符号変換、"%"による余りの算出
 - "AC"による入力内容のリセット
 ## 実装手順
-- 初めはHTMLとCSSでiPhoneの計算機アプリに近いUIを実装
-- その次にJavaScriptで計算の処理に必要な関数を実装(この時はHTMLのonclickにて挙動を確認)
-- JavaScriptのリファクタリングをしつつ、HTMLでonclickを削除
+1. HTMLとCSSでiPhoneの計算機アプリに近いUIを実装
+2. JavaScriptで計算の処理に必要な関数を実装(この時はHTMLのonclickにて挙動を確認)
+3. onclickの削除のようなリファクタリングをしつつGitHub Pagesにでデプロイ
 ## 反省点と次回以降の課題
 - 実装初期段階からonclickを使わないことによる効率化
 - JavaScriptによる動的な機能を用いたアプリケーションを作成することで実装の幅を広げる
